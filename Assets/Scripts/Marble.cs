@@ -21,21 +21,22 @@ public class Marble : MonoBehaviour
 [Serializable]
 public enum BoardObjectType
 {
-    Empty,
+    Empty = 0,
     Wall,
-    Portal_In,
-    Portal_Out,
+    Portal_1,
+    Portal_2,
     Lightning
 }
 
 [Serializable]
 public enum MarbleType
 {
-    Silver,
+    Silver = 0,
     Gold,
     White,
     Blue,
-    Red
+    Red,
+    None
 }
 
 [Serializable]

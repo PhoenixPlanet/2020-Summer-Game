@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 
-public class GameBoard : MonoBehaviour
+public class GameBoard1 : MonoBehaviour
 {
     LevelData levelData;
 
@@ -141,116 +141,4 @@ public class GameBoard : MonoBehaviour
 
         // 테스트해보세요
     }
-}
-
-[Serializable]
-public class LevelData
-{
-    [SerializeField]
-    private int width;
-    [SerializeField]
-    private int height;
-
-    public Vector2Int board_size
-    {
-        set
-        {
-            width = value.x;
-            height = value.y;
-        }
-
-        get
-        {
-            return new Vector2Int(width, height);
-        }
-    }
-
-    public BoardObjectData boardObjectData;
-    public MarbleData marbleData;
-
-    public LevelData(int width_, int height_)
-    {
-        board_size = new Vector2Int(width_, height_);
-    }
-
-    public BoardObjectType getBoardObject(int x, int y)
-    {
-        return boardObjectData.game_board[y].row[x];
-    }
-
-    public MarbleType getMarble(int x, int y)
-    {
-        return marbleData.game_board[y].row[x];
-    }
-
-    public void setMarble(int x, int y, MarbleType newMarble)
-    {
-        marbleData.game_board[y].row[x] = newMarble;
-    }
-}
-
-[Serializable]
-public class BoardObjectData
-{
-    public List<SerializableBoardObjectRow> game_board = new List<SerializableBoardObjectRow>();
-
-    public void initBoardData(Vector2Int board_size, BoardObjectType init_item)
-    {
-        for (int i = 0; i < board_size.y; i++)
-        {
-            SerializableBoardObjectRow t = new SerializableBoardObjectRow();
-            for (int j = 0; j < board_size.x; j++)
-            {
-                t.row.Add(init_item);
-            }
-            game_board.Add(t);
-        }
-    }
-}
-
-[Serializable]
-public class MarbleData
-{
-    public int marble_num;
-
-    public List<SerializableMarbleRow> game_board = new List<SerializableMarbleRow>();
-
-    public void initBoardData(Vector2Int board_size, MarbleType init_item)
-    {
-        for (int i = 0; i < board_size.y; i++)
-        {
-            SerializableMarbleRow t = new SerializableMarbleRow();
-            for (int j = 0; j < board_size.x; j++)
-            {
-                t.row.Add(init_item);
-            }
-            game_board.Add(t);
-        }
-    }
-}
-
-[Serializable]
-public class SerializableMarbleRow
-{ 
-    public List<MarbleType> row = new List<MarbleType>();
-}
-
-[Serializable]
-public class SerializableBoardObjectRow
-{
-    public List<BoardObjectType> row = new List<BoardObjectType>();
-}
-
-[Serializable]
-public struct BoardObjectPrefab
-{
-    public BoardObjectType boardObjectType;
-    public TileBase boardObjectPrefab;
-}
-
-[Serializable]
-public struct MarblePrefab
-{
-    public MarbleType marbleType;
-    public TileBase marblePrefab;
 }
