@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Marble : MonoBehaviour
 {
@@ -17,6 +18,16 @@ public class Marble : MonoBehaviour
     }
 }
 
+[Serializable]
+public enum BoardObjectType
+{
+    Empty,
+    Wall,
+    Portal,
+    Lightning
+}
+
+[Serializable]
 public enum MarbleType
 {
     Silver,
@@ -26,9 +37,15 @@ public enum MarbleType
     Red
 }
 
-public enum ObstacleType
+[Serializable]
+public enum DirectionType
 {
-    Wall,
-    Portal,
-    Lightning
+    Right,
+    Down,
+    Left,
+    Up,
+    Right_Up,
+    Right_Down,
+    Left_Up,
+    Left_Down
 }
