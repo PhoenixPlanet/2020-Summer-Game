@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BOTTON : MonoBehaviour
+public class BottonScript : MonoBehaviour
 {
     public GameObject ObjectOn;
     public GameObject ObjectOff;
-    public short Escape = 0;
-
+    
     public void objon()
     {
         ObjectOff.SetActive(false);
