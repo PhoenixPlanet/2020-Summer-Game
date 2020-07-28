@@ -65,6 +65,7 @@ public class GameBoard : MonoBehaviour
     // 구슬은 포탈에 도달하면 반대편 포탈로 이동합니다.
     // 좌표 (x, y)에 있는 구슬의 종류는 levelData.getMarble(x, y)로 구할 수 있습니다.
     // 좌표 (x, y)에 있는 물체의 종류는 levelData.getBoardObject(x, y)로 구할 수 있습니다.
+    // 좌표 (x, y)에 있는 구슬의 종류는 levelData.setMarble(x, y, MarbleType)로 지정할 수 있습니다. 
 
     // 구현해야 할 함수 1
     public List<Vector3Int> getMovablePosList(Vector3Int currentPos)
@@ -88,6 +89,7 @@ public class GameBoard : MonoBehaviour
         // 데이터 뿐 아니라 실제 화면에도 반영해줍니다.
         // 아래 코드가 실제 화면에 반영해주는 코드입니다.
         // marble.SetTile(startPoint + new Vector3Int(pos.x, -pos.y, 0), marblePrefabs.Find(x => x.marbleType == marbleType).marblePrefab);
+        // marbleType이 MarbleType.None 이라면 levelData.marbleData.marble_num을 1 감소시켜줍니다.
     }
 
     public void changeMarble(Vector3Int pos)
