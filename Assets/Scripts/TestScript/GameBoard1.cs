@@ -9,6 +9,8 @@ using UnityEngine.Tilemaps;
 
 public class GameBoard1 : MonoBehaviour
 {
+    public static int a;
+
     LevelData levelData;
 
     public Vector3Int startPoint;
