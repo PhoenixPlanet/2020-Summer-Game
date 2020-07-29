@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 57477887}
   - component: {fileID: 57477888}
+  - component: {fileID: 57477886}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -138,6 +139,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &57477886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57477885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f0da7743f6b214c986060758e48b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTargetColor: {r: 0, g: 0.57356167, b: 0.9245283, a: 0.36862746}
 --- !u!4 &57477887
 Transform:
   m_ObjectHideFlags: 0

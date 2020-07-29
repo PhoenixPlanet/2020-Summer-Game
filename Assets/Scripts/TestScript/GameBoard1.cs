@@ -23,6 +23,11 @@ public class GameBoard1 : MonoBehaviour
     public List<BoardObjectPrefab> boardObjectPrefabs;
     public List<MarblePrefab> marblePrefabs;
 
+    // 추가 구현 부분
+    public event Action OnMarbleClear;
+    public delegate void OnPressed(Vector3Int pos);
+    public event OnPressed OnBoardPressed;
+
     public void loadBoardData(string path, string file_name)
     {
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", path, file_name), FileMode.Open);
@@ -61,6 +66,41 @@ public class GameBoard1 : MonoBehaviour
         drawBoard();
     }
 
+    // 추가 구현 함수
+    public int getMarbleNum()
+    {
+        return levelData.marbleData.marble_num;
+    }
+
+    public Vector3Int posToWorld(Vector3Int pos)
+    {
+        return startPoint + new Vector3Int(pos.x, -pos.y, 0);
+    }
+
+    public Vector3Int worldToPos(Vector3Int pos)
+    {
+        Vector3Int tilePos = pos - startPoint;
+        return new Vector3Int(tilePos.x, -tilePos.y, 0);
+    }
+
+    public bool isMarble(Vector3Int pos)
+    {
+        if (levelData.getMarble(pos.x, pos.y) == MarbleType.None)
+        {
+            return false;
+        } else
+        {
+            return true;
+        }
+    }
+
+    public void setTileColor(Vector3Int pos, Color color)
+    {
+        pos = posToWorld(pos);
+        board.SetTileFlags(pos, TileFlags.None);
+        board.SetColor(pos, color);
+    }
+
     // 구현 시 알아두어야 할 점입니다.
     // 좌표는 왼쪽, 위 끝이 (0, 0)이고 오른쪽, 아래로 갈 수록 좌표가 증가합니다.
     // 구슬은 벽을 통과할 수 없고, 번개로 이동하면 어떤 구슬이던 바로 사라집니다.
@@ -79,6 +119,7 @@ public class GameBoard1 : MonoBehaviour
         // Vector3Int pos = new Vector3Int(x, y, 0); 
         // 위와 같은 형식으로 좌표 변수를 선언할 수 있습니다.
         // pos.x, pos.y와 같이 접근합니다.
+        posList.Add(new Vector3Int(1, 2, 0));
 
         return posList;
     }
@@ -124,7 +165,7 @@ public class GameBoard1 : MonoBehaviour
     void Start()
     {
         //board.SetTile(new Vector3Int(-4, -4, 0), boardObjectPrefabs.Find(x => x.boardObjectType == BoardObjectType.Wall).boardObjectPrefab);
-        initBoard(1);
+        //initBoard(1);
 
         // 테스트해보세요
     }
@@ -132,15 +173,27 @@ public class GameBoard1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int posInt = grid.LocalToCell(pos);
+            Vector3Int tilePosInt = worldToPos(posInt);
+
+            if (tilePosInt.x >= 0 && tilePosInt.x <= 10 && tilePosInt.y >= 0 && tilePosInt.y <= 10)
+            {
+                OnBoardPressed?.Invoke(tilePosInt);
+            }
             
-            Debug.Log(posInt);
-            Debug.Log(board.GetTile(posInt).name);
-        }*/
+            //Debug.Log(posInt);
+            //Debug.Log(board.GetTile(posInt).name);
+        }
 
         // 테스트해보세요
+
+        // 추가 구현 부분
+        if (getMarbleNum() == 1)
+        {
+            OnMarbleClear?.Invoke();
+        }
     }
 }
