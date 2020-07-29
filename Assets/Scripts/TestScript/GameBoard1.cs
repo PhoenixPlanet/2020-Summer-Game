@@ -177,6 +177,7 @@ public class GameBoard1 : MonoBehaviour
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int posInt = grid.LocalToCell(pos);
+            Debug.Log(posInt);
             Vector3Int tilePosInt = worldToPos(posInt);
 
             if (tilePosInt.x >= 0 && tilePosInt.x <= 10 && tilePosInt.y >= 0 && tilePosInt.y <= 10)
