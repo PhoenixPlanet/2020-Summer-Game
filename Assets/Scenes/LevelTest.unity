@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 57477887}
-  - component: {fileID: 57477886}
+  - component: {fileID: 57477888}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -138,7 +138,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &57477886
+--- !u!4 &57477887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57477885}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &57477888
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +161,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 57477885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b1e65de5e73d164b8de4ab579981e61, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d6b1ac268587c34fa5e653aec72cdfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startPoint: {x: -5, y: 4, z: 0}
@@ -183,20 +197,6 @@ MonoBehaviour:
     marblePrefab: {fileID: 11400000, guid: 3bf365b76b802a546afeb52ccde433a0, type: 2}
   - marbleType: 5
     marblePrefab: {fileID: 11400000, guid: 86e56983adf904146b72d7ae29cf1361, type: 2}
---- !u!4 &57477887
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57477885}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032356701
 GameObject:
   m_ObjectHideFlags: 0
