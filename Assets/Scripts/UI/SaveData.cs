@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SaveData : MonoBehaviour
 {
     int nextScene;
-
+    int resetGame = 0;
     void Start()
     {
        nextScene = SceneManager.GetActiveScene().buildIndex + 1;
@@ -22,6 +23,11 @@ public class SaveData : MonoBehaviour
     }
     public void Reset()
     {
-        PlayerPrefs.DeleteAll();
+        resetGame++;
+        if (resetGame >= 5)
+        {
+            PlayerPrefs.DeleteAll();
+            UnityEngine.Debug.Log("Reset");
+        }
     }
 }
