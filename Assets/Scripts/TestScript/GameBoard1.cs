@@ -119,7 +119,7 @@ public class GameBoard1 : MonoBehaviour
         // Vector3Int pos = new Vector3Int(x, y, 0); 
         // 위와 같은 형식으로 좌표 변수를 선언할 수 있습니다.
         // pos.x, pos.y와 같이 접근합니다.
-        posList.Add(new Vector3Int(1, 2, 0));
+        posList.Add(new Vector3Int(2, 3, 0));
 
         return posList;
     }
@@ -176,8 +176,7 @@ public class GameBoard1 : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int posInt = grid.LocalToCell(pos);
-            Debug.Log(posInt);
+            Vector3Int posInt = grid.WorldToCell(pos);
             Vector3Int tilePosInt = worldToPos(posInt);
 
             if (tilePosInt.x >= 0 && tilePosInt.x <= 10 && tilePosInt.y >= 0 && tilePosInt.y <= 10)

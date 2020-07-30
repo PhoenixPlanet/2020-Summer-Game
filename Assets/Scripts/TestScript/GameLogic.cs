@@ -1,14 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameLogic : MonoBehaviour
 {
     GameBoard1 gameBoard;
 
-    private MarblePressedState marblePressedState = MarblePressedState.NotSelected;
-
     public Color moveTargetColor;
+    public Color defaultColor;
+
+    public AudioSource audioSource;
+
+    public AudioClip marbleSelectClip;
+    public AudioClip wrongSelectClip;
+    public AudioClip marbleMoveClip;
+
+    public event Action OnMarbleClear;
+
+    private List<Vector3Int> movablePosList;
+    private Vector3Int selectedMarblePos;
+    private MarblePressedState marblePressedState = MarblePressedState.NotSelected;
 
     public void OnBoardPressed(Vector3Int pos)
     {
@@ -16,12 +28,49 @@ public class GameLogic : MonoBehaviour
         {
             if (gameBoard.isMarble(pos))
             {
-                List<Vector3Int> movablePosList = gameBoard.getMovablePosList(pos);
+                selectedMarblePos = pos;
+                movablePosList = gameBoard.getMovablePosList(pos);
+
+                if (movablePosList.Count == 0)
+                {
+                    audioSource.clip = wrongSelectClip;
+                    audioSource.Play();
+                    return;
+                }
 
                 foreach (Vector3Int p in movablePosList)
                 {
                     gameBoard.setTileColor(p, moveTargetColor);
                 }
+                marblePressedState = MarblePressedState.MarbleSelected;
+
+                audioSource.clip = marbleSelectClip;
+                audioSource.Play();
+            }
+            else
+            {
+                audioSource.clip = wrongSelectClip;
+                audioSource.Play();
+            }
+        } else if (marblePressedState == MarblePressedState.MarbleSelected)
+        {
+            if (movablePosList.Exists(x => x == pos))
+            {
+                gameBoard.moveMarble(selectedMarblePos, pos);
+
+                audioSource.clip = marbleMoveClip;
+                audioSource.Play();
+            }
+            else
+            {
+                audioSource.clip = wrongSelectClip;
+                audioSource.Play();
+            }
+
+            marblePressedState = MarblePressedState.NotSelected;
+            foreach (Vector3Int p in movablePosList)
+            {
+                gameBoard.setTileColor(p, defaultColor);
             }
         }
     }
@@ -30,11 +79,19 @@ public class GameLogic : MonoBehaviour
     {
         gameBoard.initBoard(level);
         gameBoard.OnBoardPressed += OnBoardPressed;
+        gameBoard.OnMarbleClear += endLevel;
+    }
+
+    public void endLevel()
+    {
+        gameBoard.OnBoardPressed -= OnBoardPressed;
+        gameBoard.OnMarbleClear -= endLevel;
     }
 
     void Awake()
     {
         gameBoard = GetComponent<GameBoard1>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
