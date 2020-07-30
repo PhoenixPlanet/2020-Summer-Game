@@ -5,7 +5,7 @@ using System;
 
 public class GameLogic : MonoBehaviour
 {
-    GameBoard1 gameBoard;
+    GameBoard gameBoard;
 
     public Color moveTargetColor;
     public Color defaultColor;
@@ -21,6 +21,8 @@ public class GameLogic : MonoBehaviour
     private List<Vector3Int> movablePosList;
     private Vector3Int selectedMarblePos;
     private MarblePressedState marblePressedState = MarblePressedState.NotSelected;
+
+    private int currentLevel;
 
     public void OnBoardPressed(Vector3Int pos)
     {
@@ -77,6 +79,7 @@ public class GameLogic : MonoBehaviour
 
     public void startLevel(int level)
     {
+        currentLevel = level;
         gameBoard.initBoard(level);
         gameBoard.OnBoardPressed += OnBoardPressed;
         gameBoard.OnMarbleClear += endLevel;
@@ -86,11 +89,18 @@ public class GameLogic : MonoBehaviour
     {
         gameBoard.OnBoardPressed -= OnBoardPressed;
         gameBoard.OnMarbleClear -= endLevel;
+
+        OnMarbleClear();
+    }
+
+    public void refreshLevel()
+    {
+        gameBoard.initBoard(currentLevel);
     }
 
     void Awake()
     {
-        gameBoard = GetComponent<GameBoard1>();
+        gameBoard = GetComponent<GameBoard>();
         audioSource = GetComponent<AudioSource>();
     }
 
