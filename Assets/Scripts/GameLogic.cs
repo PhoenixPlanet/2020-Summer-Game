@@ -5,6 +5,21 @@ using System;
 
 public class GameLogic : MonoBehaviour
 {
+    public static GameLogic instance
+    {
+        get
+        {
+            if (m_instance == null)
+            {
+                m_instance = FindObjectOfType<GameLogic>();
+            }
+
+            return m_instance;
+        }
+    }
+
+    private static GameLogic m_instance;
+
     GameBoard gameBoard;
 
     public Color moveTargetColor;
@@ -21,8 +36,6 @@ public class GameLogic : MonoBehaviour
     private List<Vector3Int> movablePosList;
     private Vector3Int selectedMarblePos;
     private MarblePressedState marblePressedState = MarblePressedState.NotSelected;
-
-    private int currentLevel;
 
     public void OnBoardPressed(Vector3Int pos)
     {
@@ -74,12 +87,12 @@ public class GameLogic : MonoBehaviour
             {
                 gameBoard.setTileColor(p, defaultColor);
             }
+            gameBoard.board.RefreshAllTiles();
         }
     }
 
     public void startLevel(int level)
     {
-        currentLevel = level;
         gameBoard.initBoard(level);
         gameBoard.OnBoardPressed += OnBoardPressed;
         gameBoard.OnMarbleClear += endLevel;
@@ -93,9 +106,11 @@ public class GameLogic : MonoBehaviour
         OnMarbleClear();
     }
 
-    public void refreshLevel()
+    public void refreshLevel(int level)
     {
-        gameBoard.initBoard(currentLevel);
+        audioSource.clip = marbleMoveClip;
+        audioSource.Play();
+        gameBoard.initBoard(level);
     }
 
     void Awake()
@@ -107,7 +122,7 @@ public class GameLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startLevel(1);
+        
     }
 
     // Update is called once per frame

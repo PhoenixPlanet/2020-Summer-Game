@@ -173,10 +173,8 @@ public class GameBoard : MonoBehaviour
         // 아래 코드가 실제 화면에 반영해주는 코드입니다.
         // marble.SetTile(startPoint + new Vector3Int(pos.x, -pos.y, 0), marblePrefabs.Find(x => x.marbleType == marbleType).marblePrefab);
         // marbleType이 MarbleType.None 이라면 levelData.marbleData.marble_num을 1 감소시켜줍니다.
-        MarbleType check = levelData.getMarble(pos.x, pos.y);
         levelData.setMarble(pos.x, pos.y, marbleType);
         marble.SetTile(startPoint + new Vector3Int(pos.x, -pos.y, 0), marblePrefabs.Find(x => x.marbleType == marbleType).marblePrefab);
-        if (marbleType == MarbleType.None && check != MarbleType.None) levelData.marbleData.marble_num--;
         // 원래 None인 곳을 None으로 바꾸었을 때 구슬 개수를 1개 감산하지 않기 위해 check변수와 if문 추가함
     }
 
@@ -186,10 +184,16 @@ public class GameBoard : MonoBehaviour
         // 금색 구슬은 흰색 구슬로, 나머지 구슬은 없애면 됩니다.
         // setMarble 함수를 활용합니다.
         // 역시 실제 화면에도 반영해줍니다.
-        if (levelData.getMarble(pos.x, pos.y) == MarbleType.Gold)
-            setMarble(pos, MarbleType.Silver);
-        else
-            setMarble(pos, MarbleType.None);
+        if (levelData.getMarble(pos.x, pos.y) != MarbleType.None)
+        {
+            if (levelData.getMarble(pos.x, pos.y) == MarbleType.Gold)
+                setMarble(pos, MarbleType.Silver);
+            else
+            {
+                setMarble(pos, MarbleType.None);
+                levelData.marbleData.marble_num--;
+            }
+        }
     }
 
     // 구현해야 할 함수 3
@@ -229,12 +233,23 @@ public class GameBoard : MonoBehaviour
             else if (len == 3)
             {
                 changeMarble(new Vector3Int((start.x + end.x) / 2, (start.y + end.y) / 2, 0));//뛰어넘은 구슬
-                changeMarble(new Vector3Int((start.x + end.x) / 2 + 1, (start.y + end.y) / 2 + 1, 0));//뛰어넘은 구슬
+                if (start.x == end.x)
+                {
+                    changeMarble(new Vector3Int(start.x, (start.y + end.y) / 2 + 1, 0));
+                }
+                else
+                {
+                    changeMarble(new Vector3Int((start.x + end.x) / 2 + 1, start.y, 0));
+                }
+                //뛰어넘은 구슬
             }
         }//빨간 구슬의 경우
         if (levelData.getBoardObject(end.x, end.y) == BoardObjectType.Lightning)
         {
-            changeMarble(end);
+            if (levelData.getMarble(end.x, end.y) == MarbleType.Gold)
+            {
+                changeMarble(end);
+            }
             changeMarble(end);//금색 구슬일 경우도 사라지게 하기 위해 2번 적용
         }//도착지가 번개인 경우
         else if (levelData.getBoardObject(end.x, end.y) == BoardObjectType.Portal_In)

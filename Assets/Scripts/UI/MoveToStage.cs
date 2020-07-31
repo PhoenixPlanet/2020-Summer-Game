@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MoveToStage : MonoBehaviour
 {
-    
     public void LoadStage()
     {
         string objectName = gameObject.name;

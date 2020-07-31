@@ -8,6 +8,7 @@ public class SaveData : MonoBehaviour
 {
     int nextScene;
     int resetGame = 0;
+
     void Start()
     {
        nextScene = SceneManager.GetActiveScene().buildIndex + 1;
@@ -21,6 +22,7 @@ public class SaveData : MonoBehaviour
             PlayerPrefs.SetInt("levelAt", nextScene);
         }
     }
+
     public void Reset()
     {
         resetGame++;
