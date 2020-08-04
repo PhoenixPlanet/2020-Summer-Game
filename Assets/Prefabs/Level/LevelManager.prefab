@@ -1,0 +1,194 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3748758415516410586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3748758415516410584}
+  - component: {fileID: 3748758415516410663}
+  - component: {fileID: 3748758415516410585}
+  - component: {fileID: 3748758415516410662}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3748758415516410584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3748758415516410586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3748758415516410663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3748758415516410586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1e65de5e73d164b8de4ab579981e61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPoint: {x: -5, y: 4, z: 0}
+  board: {fileID: 0}
+  marble: {fileID: 0}
+  grid: {fileID: 0}
+  boardObjectPrefabs:
+  - boardObjectType: 0
+    boardObjectPrefab: {fileID: 11400000, guid: 9a43ff5e03916c74098798156ba44774,
+      type: 2}
+  - boardObjectType: 1
+    boardObjectPrefab: {fileID: 11400000, guid: 274f25c2753d2044596fc3a898917fe8,
+      type: 2}
+  - boardObjectType: 2
+    boardObjectPrefab: {fileID: 11400000, guid: 59a7510ec1366fa4da558c4ec4cfe868,
+      type: 2}
+  - boardObjectType: 3
+    boardObjectPrefab: {fileID: 11400000, guid: 3ba477bf62ea33449bc8fc37404f5b84,
+      type: 2}
+  - boardObjectType: 4
+    boardObjectPrefab: {fileID: 11400000, guid: f892caf1a298bc3478c4f0f87d38cbf3,
+      type: 2}
+  marblePrefabs:
+  - marbleType: 0
+    marblePrefab: {fileID: 11400000, guid: 179ed5994fecc16479d0fff7e83eb2ff, type: 2}
+  - marbleType: 1
+    marblePrefab: {fileID: 11400000, guid: d8f6e5a9f53d2164aa5c3ce6ded6dec4, type: 2}
+  - marbleType: 2
+    marblePrefab: {fileID: 11400000, guid: dc10f0b1870499e49b6d327720084955, type: 2}
+  - marbleType: 3
+    marblePrefab: {fileID: 11400000, guid: 546d3bb29be67e54ababff30d7fd0f56, type: 2}
+  - marbleType: 4
+    marblePrefab: {fileID: 11400000, guid: 0d302f45da12b6e4baa58f83ff0262ab, type: 2}
+  - marbleType: 5
+    marblePrefab: {fileID: 11400000, guid: 86e56983adf904146b72d7ae29cf1361, type: 2}
+--- !u!114 &3748758415516410585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3748758415516410586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f0da7743f6b214c986060758e48b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTargetColor: {r: 0, g: 0.57356167, b: 0.9245283, a: 0.36862746}
+  defaultColor: {r: 1, g: 1, b: 1, a: 0}
+  audioSource: {fileID: 0}
+  marbleSelectClip: {fileID: 8300000, guid: c478790a0a84abf4ea54a0e2244f4349, type: 3}
+  wrongSelectClip: {fileID: 8300000, guid: b6f7583a479465d4ca4087316e23495d, type: 3}
+  marbleMoveClip: {fileID: 8300000, guid: d0ced436476261e4b843dac0893d4da1, type: 3}
+--- !u!82 &3748758415516410662
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3748758415516410586}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

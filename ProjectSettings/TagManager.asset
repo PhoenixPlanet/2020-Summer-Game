@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 733167753
+    locked: 0
+  - name: BackTile
+    uniqueID: 1227273167
+    locked: 0
+  - name: Board
+    uniqueID: 435616271
+    locked: 0
+  - name: Marble
+    uniqueID: 4282354343
+    locked: 0

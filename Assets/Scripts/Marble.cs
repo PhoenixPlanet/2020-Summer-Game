@@ -23,8 +23,8 @@ public enum BoardObjectType
 {
     Empty = 0,
     Wall,
-    Portal_1,
-    Portal_2,
+    Portal_In,
+    Portal_Out,
     Lightning
 }
 
