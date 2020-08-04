@@ -32,4 +32,9 @@ public class SaveData : MonoBehaviour
             UnityEngine.Debug.Log("Reset");
         }
     }
+
+    public void openAll()
+    {
+        PlayerPrefs.SetInt("levelAt", 11);
+    }
 }
