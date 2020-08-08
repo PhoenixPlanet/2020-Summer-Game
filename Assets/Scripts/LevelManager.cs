@@ -24,6 +24,9 @@ public class LevelManager : MonoBehaviour
 
     public GameObject ingameUI;
     public GameObject clearUI;
+    public GameObject tutoUI;
+    public Image tutoImage;
+    public Sprite[] tutoImageSprites;
 
     private int currentLevel;
 
@@ -31,6 +34,11 @@ public class LevelManager : MonoBehaviour
     {
         audioSource.clip = clearClip;
         audioSource.Play();
+
+        if (currentLevel == PlayerPrefs.GetInt("levelAt", 1))
+        {
+            PlayerPrefs.SetInt("levelAt", currentLevel + 1);
+        }
 
         clearUI.SetActive(true);
     }
@@ -52,18 +60,52 @@ public class LevelManager : MonoBehaviour
         ingameUI.SetActive(true);
         clearUI.SetActive(false);
         currentLevel++;
-        if (currentLevel > PlayerPrefs.GetInt("levelAt", 1))
-        {
-            PlayerPrefs.SetInt("levelAt", currentLevel);
-        }
+
         GameLogic.instance.startLevel(currentLevel);
+        showTutorial();
+    }
+    
+    public void showTutorial()
+    {
+        if (currentLevel == PlayerPrefs.GetInt("levelAt", 1))
+        {
+            switch (currentLevel)
+            {
+                case 1:
+                    tutoImage.sprite = tutoImageSprites[0];
+                    tutoUI.SetActive(true);
+                    break;
+                case 2:
+                    tutoImage.sprite = tutoImageSprites[1];
+                    tutoUI.SetActive(true);
+                    break;
+                case 3:
+                    tutoImage.sprite = tutoImageSprites[2];
+                    tutoUI.SetActive(true);
+                    break;
+                case 4:
+                    tutoImage.sprite = tutoImageSprites[3];
+                    tutoUI.SetActive(true);
+                    break;
+                case 5:
+                    tutoImage.sprite = tutoImageSprites[4];
+                    tutoUI.SetActive(true);
+                    break;
+                case 7:
+                    tutoImage.sprite = tutoImageSprites[5];
+                    tutoUI.SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();    
+        audioSource = GetComponent<AudioSource>();
     }
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +117,7 @@ public class LevelManager : MonoBehaviour
         currentLevel = PlayerPrefs.GetInt("current_level");
         Debug.Log(currentLevel);
         GameLogic.instance.startLevel(currentLevel);
+        showTutorial();
     }
 
     // Update is called once per frame
