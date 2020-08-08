@@ -8,8 +8,15 @@ public class BottonScript : MonoBehaviour
     
     public void objon()
     {
-        ObjectOff.SetActive(false);
-        ObjectOn.SetActive(true);
+        if (ObjectOff != null)
+        {
+            ObjectOff.SetActive(false);
+        }
+        if (ObjectOn != null)
+        {
+            ObjectOn.SetActive(true);
+        }
+        
     }
     public void QUIT()
     {
