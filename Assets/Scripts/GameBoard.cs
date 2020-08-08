@@ -30,7 +30,16 @@ public class GameBoard : MonoBehaviour
 
     public void loadBoardData(string path, string file_name)
     {
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", path, file_name), FileMode.Open);
+        string originalPath = string.Format("{0}/{1}.json", path, file_name);
+
+        WWW reader = new WWW(originalPath);
+        while(!reader.isDone) { }
+
+        string realPath = Application.persistentDataPath + "/levelData";
+
+        File.WriteAllBytes(realPath, reader.bytes);
+
+        FileStream fileStream = new FileStream(realPath, FileMode.Open);
         byte[] data = new byte[fileStream.Length];
         fileStream.Read(data, 0, data.Length);
         fileStream.Close();
@@ -62,7 +71,7 @@ public class GameBoard : MonoBehaviour
 
     public void initBoard(int level)
     {
-        loadBoardData(Application.dataPath + "/levelData", "Board_" + level);
+        loadBoardData(Application.streamingAssetsPath + "/levelData", "Board_" + level);
         drawBoard();
     }
 
