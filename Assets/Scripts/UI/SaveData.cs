@@ -8,6 +8,7 @@ public class SaveData : MonoBehaviour
 {
     int nextScene;
     int resetGame = 0;
+    int openAllStages = 0;
 
     void Start()
     {
@@ -35,6 +36,10 @@ public class SaveData : MonoBehaviour
 
     public void openAll()
     {
-        PlayerPrefs.SetInt("levelAt", 11);
+        openAllStages++;
+        if (openAllStages >= 5)
+        {
+            PlayerPrefs.SetInt("levelAt", 11);
+        }
     }
 }
