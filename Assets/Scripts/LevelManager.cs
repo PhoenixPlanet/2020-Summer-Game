@@ -24,6 +24,9 @@ public class LevelManager : MonoBehaviour
 
     public GameObject ingameUI;
     public GameObject clearUI;
+    public GameObject tutoUI;
+    private Image tutoImage;
+    public Sprite[] tutoImageSprites;
 
     private int currentLevel;
 
@@ -31,6 +34,11 @@ public class LevelManager : MonoBehaviour
     {
         audioSource.clip = clearClip;
         audioSource.Play();
+
+        if (currentLevel == PlayerPrefs.GetInt("levelAt", 1))
+        {
+            PlayerPrefs.SetInt("levelAt", currentLevel + 1);
+        }
 
         clearUI.SetActive(true);
     }
@@ -52,16 +60,14 @@ public class LevelManager : MonoBehaviour
         ingameUI.SetActive(true);
         clearUI.SetActive(false);
         currentLevel++;
-        if (currentLevel > PlayerPrefs.GetInt("levelAt", 1))
-        {
-            PlayerPrefs.SetInt("levelAt", currentLevel);
-        }
+
         GameLogic.instance.startLevel(currentLevel);
     }
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();    
+        audioSource = GetComponent<AudioSource>();
+        tutoImage = tutoUI.GetComponent<Image>();
     }
 
     // Start is called before the first frame update
