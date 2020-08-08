@@ -39,7 +39,8 @@ public class SaveData : MonoBehaviour
         openAllStages++;
         if (openAllStages >= 5)
         {
-            PlayerPrefs.SetInt("levelAt", 11);
+            PlayerPrefs.SetInt("levelAt", 15);
+            UnityEngine.Debug.Log("Open All");
         }
     }
 }
